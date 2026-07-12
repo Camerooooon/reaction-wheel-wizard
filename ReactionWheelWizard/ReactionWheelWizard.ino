@@ -2,8 +2,8 @@
 #include <SoftwareSerial.h>
 
 #define VESC_BAUD_RATE 115200
-#define VESC_RX_PIN 0
-#define VESC_TX_PIN 1
+#define VESC_RX_PIN 1
+#define VESC_TX_PIN 0
 
 VescUart uart;
 SoftwareSerial vesc_ser = SoftwareSerial(VESC_RX_PIN, VESC_TX_PIN);
