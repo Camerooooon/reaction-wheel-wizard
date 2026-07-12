@@ -10,16 +10,22 @@
 
 VescUart uart;
 SoftwareSerial vesc_ser = SoftwareSerial(VESC_RX_PIN, VESC_TX_PIN);
-Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x29, &Wire);
+Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
 
 void setup() {
   Serial.begin(9600);
   vesc_ser.begin(VESC_BAUD_RATE);
 
-  while (!Serial) {;}
-  while (!vesc_ser) {;}
-  while(!bno.begin()) {;}
+  while (!Serial) {}
+  while (!vesc_ser) {
+    Serial.printf("Waiting for vesc serial...");
+    delay(1000);
+  }
 
+  while (!bno.begin()) {
+    Serial.printf("Waiting for BNO...");
+    delay(1000);
+  }
   uart.setSerialPort(&vesc_ser);
 }
 
