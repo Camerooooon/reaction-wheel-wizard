@@ -36,6 +36,6 @@ void loop() {
   }
 
   uart.sendKeepalive();
-  uart.setCurrent(5);
+  uart.setCurrent(4);
   delay(1000 / UPDATES_PER_SECOND);
 }
