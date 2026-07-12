@@ -10,7 +10,7 @@
 
 VescUart uart;
 SoftwareSerial vesc_ser = SoftwareSerial(VESC_RX_PIN, VESC_TX_PIN);
-Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
+Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x29, &Wire);
 
 void setup() {
   Serial.begin(9600);
@@ -45,7 +45,7 @@ void loop() {
   bno.getEvent(&accelerometerData, Adafruit_BNO055::VECTOR_ACCELEROMETER);
   bno.getEvent(&gravityData, Adafruit_BNO055::VECTOR_GRAVITY);
 
-  Serial.printf("pos: %d %d %d", orientationData.orientation.x, orientationData.orientation.y, orientationData.orientation.z);
+  Serial.printf("pos: %d %d %d\n", orientationData.orientation.x, orientationData.orientation.y, orientationData.orientation.z);
 
   uart.sendKeepalive();
   uart.setCurrent(0);
