@@ -1,11 +1,17 @@
 #include <VescUart.h>
+#include <SoftwareSerial.h>
 
 VescUart uart;
+SoftwareSerial vesc_ser = SoftwareSerial(0, 1);
 
 void setup() {
   Serial.begin(9600);
+  vesc_ser.begin(19200);
 
   while (!Serial) {;}
+  while (!vesc_ser) {;}
+
+  uart.setSerialPort(&vesc_ser);
 }
 
 void loop() {
