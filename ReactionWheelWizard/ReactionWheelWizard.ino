@@ -11,7 +11,7 @@
 #define DESIRED_ROLL 0
 #define DESIRED_PITCH 0
 
-#define KP_ROLL 0.01
+#define KP_ROLL 0.1
 #define KD_ROLL 0
 
 VescUart uart;
