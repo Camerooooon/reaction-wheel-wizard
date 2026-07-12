@@ -1,12 +1,16 @@
 #include <VescUart.h>
 #include <SoftwareSerial.h>
 
+#define VESC_BAUD_RATE 19200
+#define VESC_RX_PIN 0
+#define VESC_TX_PIN 1
+
 VescUart uart;
-SoftwareSerial vesc_ser = SoftwareSerial(0, 1);
+SoftwareSerial vesc_ser = SoftwareSerial(VESC_RX_PIN, VESC_TX_PIN);
 
 void setup() {
   Serial.begin(9600);
-  vesc_ser.begin(19200);
+  vesc_ser.begin(VESC_BAUD_RATE);
 
   while (!Serial) {;}
   while (!vesc_ser) {;}
