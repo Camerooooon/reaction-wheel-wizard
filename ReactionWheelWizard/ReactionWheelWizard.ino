@@ -8,6 +8,12 @@
 
 #define UPDATES_PER_SECOND 30 
 
+#define DESIRED_ROLL 0
+#define DESIRED_PITCH 0
+
+#define KP_ROLL 0.01
+#define KD_ROLL 0
+
 VescUart uart;
 SoftwareSerial vesc_ser = SoftwareSerial(VESC_RX_PIN, VESC_TX_PIN);
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
@@ -47,9 +53,17 @@ void loop() {
   sensors_event_t orientationData;
   bno.getEvent(&orientationData, Adafruit_BNO055::VECTOR_EULER);
 
+  // For our setup 
   Serial.printf("pos: %f %f %f\n", orientationData.orientation.x, orientationData.orientation.y, orientationData.orientation.z);
 
+  float roll = orientationData.orientation.z;
+  float pitch = orientationData.orientation.x;
+
+  float roll_error = DESIRED_ROLL - roll;
+
+  float roll_command = roll_error * KP_ROLL;
+
   uart.sendKeepalive();
-  uart.setCurrent(0);
+  uart.setCurrent(roll_command);
   delay(1000 / UPDATES_PER_SECOND);
 }
