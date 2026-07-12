@@ -14,6 +14,8 @@
 #define KP_ROLL 0
 #define KD_ROLL 0.1
 
+#define RAD_TO_DEG 57.2958
+
 VescUart uart;
 SoftwareSerial vesc_ser = SoftwareSerial(VESC_RX_PIN, VESC_TX_PIN);
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
@@ -59,7 +61,7 @@ void loop() {
   Serial.printf("vel: %f %f %f\n", angVelocityData.gyro.x, angVelocityData.gyro.y, angVelocityData.gyro.z);
 
   float roll = orientationData.orientation.z;
-  float d_roll_dt = angVelocityData.gyro.z;
+  float d_roll_dt = angVelocityData.gyro.z * RAD_TO_DEG;
   float pitch = orientationData.orientation.x;
 
   float roll_error = DESIRED_ROLL - roll;
