@@ -44,15 +44,10 @@ void loop() {
     Serial.printf("Could not get fw version\n");
   }
 
-  sensors_event_t orientationData , angVelocityData , linearAccelData, magnetometerData, accelerometerData, gravityData;
+  sensors_event_t orientationData;
   bno.getEvent(&orientationData, Adafruit_BNO055::VECTOR_EULER);
-  bno.getEvent(&angVelocityData, Adafruit_BNO055::VECTOR_GYROSCOPE);
-  bno.getEvent(&linearAccelData, Adafruit_BNO055::VECTOR_LINEARACCEL);
-  bno.getEvent(&magnetometerData, Adafruit_BNO055::VECTOR_MAGNETOMETER);
-  bno.getEvent(&accelerometerData, Adafruit_BNO055::VECTOR_ACCELEROMETER);
-  bno.getEvent(&gravityData, Adafruit_BNO055::VECTOR_GRAVITY);
 
-  Serial.printf("pos: %d %d %d\n", orientationData.orientation.x, orientationData.orientation.y, orientationData.orientation.z);
+  Serial.printf("pos: %f %f %f\n", orientationData.orientation.x, orientationData.orientation.y, orientationData.orientation.z);
 
   uart.sendKeepalive();
   uart.setCurrent(0);
