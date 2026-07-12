@@ -5,7 +5,7 @@
 #define VESC_RX_PIN 1
 #define VESC_TX_PIN 0
 
-#define UPDATES_PER_SECOND 100
+#define UPDATES_PER_SECOND 30 
 
 VescUart uart;
 SoftwareSerial vesc_ser = SoftwareSerial(VESC_RX_PIN, VESC_TX_PIN);
@@ -36,6 +36,6 @@ void loop() {
   }
 
   uart.sendKeepalive();
-  uart.setRPM(10);
+  uart.setRPM(100);
   delay(1000 / UPDATES_PER_SECOND);
 }
