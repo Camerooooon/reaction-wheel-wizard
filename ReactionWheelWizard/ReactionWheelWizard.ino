@@ -11,10 +11,8 @@
 #define DESIRED_ROLL 0
 #define DESIRED_PITCH 0
 
-#define KP_ROLL 0
-#define KD_ROLL 0.1
-
-#define RAD_TO_DEG 57.2958
+#define KP_ROLL 0.2
+#define KD_ROLL 0
 
 VescUart uart;
 SoftwareSerial vesc_ser = SoftwareSerial(VESC_RX_PIN, VESC_TX_PIN);
