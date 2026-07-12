@@ -5,6 +5,8 @@
 #define VESC_RX_PIN 1
 #define VESC_TX_PIN 0
 
+#define UPDATES_PER_SECOND 100
+
 VescUart uart;
 SoftwareSerial vesc_ser = SoftwareSerial(VESC_RX_PIN, VESC_TX_PIN);
 
@@ -32,5 +34,8 @@ void loop() {
   } else {
     Serial.printf("Could not get fw version\n");
   }
-  delay(1000);
+
+  uart.sendKeepalive();
+  uart.setRPM(10);
+  delay(1000 / UPDATES_PER_SECOND);
 }
