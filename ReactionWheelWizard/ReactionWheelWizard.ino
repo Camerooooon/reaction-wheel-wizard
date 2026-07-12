@@ -1,7 +1,7 @@
 #include <VescUart.h>
 #include <SoftwareSerial.h>
 
-#define VESC_BAUD_RATE 19200
+#define VESC_BAUD_RATE 115200
 #define VESC_RX_PIN 0
 #define VESC_TX_PIN 1
 
