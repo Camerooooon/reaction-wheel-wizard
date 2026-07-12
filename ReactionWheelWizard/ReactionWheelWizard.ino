@@ -29,6 +29,8 @@ void loop() {
 
   if (uart.getFWversion()) {
     Serial.printf("FW VER: %d\n", uart.fw_version);
+  } else {
+    Serial.printf("Could not get fw version\n");
   }
   delay(1000);
 }
