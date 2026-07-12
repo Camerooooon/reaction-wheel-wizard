@@ -24,7 +24,7 @@ void loop() {
   Serial.println("Hello world!");
 
   if (uart.getVescValues()) {
-    Serial.printf("RPM: %d\n", uart.data.rpm);
+    Serial.printf("Motor Temp: %d\n", uart.data.tempMotor);
   } else {
     Serial.printf("Failed to get RPM data ):<\n");
   }
