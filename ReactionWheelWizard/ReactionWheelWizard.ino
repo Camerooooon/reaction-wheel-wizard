@@ -48,6 +48,6 @@ void loop() {
   Serial.printf("pos: %d %d %d", orientationData.orientation.x, orientationData.orientation.y, orientationData.orientation.z);
 
   uart.sendKeepalive();
-  // uart.setCurrent(4);
+  uart.setCurrent(0);
   delay(1000 / UPDATES_PER_SECOND);
 }
