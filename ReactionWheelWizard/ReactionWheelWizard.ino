@@ -12,9 +12,13 @@ void loop() {
   Serial.println("Hello world!");
 
   if (uart.getVescValues()) {
-    Serial.printf("RPM: %d", uart.data.rpm);
+    Serial.printf("RPM: %d\n", uart.data.rpm);
   } else {
-    Serial.printf("Failed to get RPM data ):<");
+    Serial.printf("Failed to get RPM data ):<\n");
+  }
+
+  if (uart.getFWversion()) {
+    Serial.printf("FW VER: %d\n", uart.fw_version);
   }
   delay(1000);
 }
