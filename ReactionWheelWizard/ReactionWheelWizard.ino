@@ -18,6 +18,7 @@ void setup() {
 
   while (!Serial) {;}
   while (!vesc_ser) {;}
+  while(!bno.begin()) {;}
 
   uart.setSerialPort(&vesc_ser);
 }
