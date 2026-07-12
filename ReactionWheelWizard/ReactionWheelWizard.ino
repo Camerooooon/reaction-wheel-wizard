@@ -11,8 +11,8 @@
 #define DESIRED_ROLL 0
 #define DESIRED_PITCH 0
 
-#define KP_ROLL 0.1
-#define KD_ROLL 0
+#define KP_ROLL 0
+#define KD_ROLL 0.1
 
 VescUart uart;
 SoftwareSerial vesc_ser = SoftwareSerial(VESC_RX_PIN, VESC_TX_PIN);
@@ -59,11 +59,12 @@ void loop() {
   Serial.printf("vel: %f %f %f\n", angVelocityData.gyro.x, angVelocityData.gyro.y, angVelocityData.gyro.z);
 
   float roll = orientationData.orientation.z;
+  float d_roll_dt = angVelocityData.gyro.z;
   float pitch = orientationData.orientation.x;
 
   float roll_error = DESIRED_ROLL - roll;
 
-  float roll_command = roll_error * KP_ROLL;
+  float roll_command = roll_error * KP_ROLL - d_roll_dt * KD_ROLL;
 
   uart.sendKeepalive();
   uart.setCurrent(roll_command);
