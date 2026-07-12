@@ -50,11 +50,13 @@ void loop() {
     Serial.printf("Could not get fw version\n");
   }
 
-  sensors_event_t orientationData;
+  sensors_event_t orientationData, angVelocityData;
   bno.getEvent(&orientationData, Adafruit_BNO055::VECTOR_EULER);
+  bno.getEvent(&angVelocityData, Adafruit_BNO055::VECTOR_GYROSCOPE);
 
   // For our setup 
   Serial.printf("pos: %f %f %f\n", orientationData.orientation.x, orientationData.orientation.y, orientationData.orientation.z);
+  Serial.printf("vel: %f %f %f\n", angVelocityData.gyro.x, angVelocityData.gyro.y, angVelocityData.gyro.z);
 
   float roll = orientationData.orientation.z;
   float pitch = orientationData.orientation.x;
