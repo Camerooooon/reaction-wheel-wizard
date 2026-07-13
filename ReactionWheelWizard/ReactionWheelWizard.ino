@@ -80,7 +80,7 @@ void loop() {
   }
 
   uart.sendKeepalive();
-  // uart.setCurrent(roll_command, ROLL_CAN_ID);
-  uart.setCurrent(4, PITCH_CAN_ID);
+  uart.setCurrent(roll_command, ROLL_CAN_ID);
+  uart.setCurrent(pitch_command, PITCH_CAN_ID);
   delay(1000 / UPDATES_PER_SECOND);
 }
