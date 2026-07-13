@@ -7,7 +7,7 @@
 #define VESC_TX_PIN 0
 
 #define ROLL_CAN_ID 0
-#define PITCH_CAN_ID 0
+#define PITCH_CAN_ID 1
 
 #define UPDATES_PER_SECOND 30 
 
