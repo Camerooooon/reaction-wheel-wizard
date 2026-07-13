@@ -62,8 +62,8 @@ void loop() {
   float roll = orientationData.orientation.z;
   float d_roll_dt = angVelocityData.gyro.z * RAD_TO_DEG;
 
-  float pitch = orientationData.orientation.x;
-  float d_pitch_dt = angVelocityData.gyro.x * RAD_TO_DEG;
+  float pitch = orientationData.orientation.y;
+  float d_pitch_dt = angVelocityData.gyro.y * RAD_TO_DEG;
 
   float roll_error = DESIRED_ROLL - roll;
   float pitch_error = DESIRED_PITCH - pitch;
