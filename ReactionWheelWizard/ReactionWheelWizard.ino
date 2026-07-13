@@ -23,9 +23,14 @@
 #define INVERT_PITCH 1
 #define INVERT_ROLL 0
 
+#define MAX_ROLL_SHUTOFF_DEG 10
+#define MAX_PITCH_SHUTOFF_DEG 10
+
 VescUart uart;
 SoftwareSerial vesc_ser = SoftwareSerial(VESC_RX_PIN, VESC_TX_PIN);
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
+
+int max_angle_fault = 0;
 
 void setup() {
   Serial.begin(9600);
@@ -74,8 +79,27 @@ void loop() {
     roll_command = -roll_command;
   }
 
+  if (abs(orientationData.orientation.z) > MAX_ROLL_SHUTOFF_DEG || abs(orientationData.orientation.y) > MAX_PITCH_SHUTOFF_DEG) {
+    max_angle_fault = 1;
+  }
+
+  Serial.printf("Faults: ");
+
+  if (max_angle_fault) {
+    Serial.printf("max_angle_fault");
+  }
+
+  Serial.println();
+
   uart.sendKeepalive();
-  uart.setCurrent(roll_command, ROLL_CAN_ID);
-  uart.setCurrent(pitch_command, PITCH_CAN_ID);
+
+  if (!max_angle_fault) {
+    uart.setCurrent(roll_command, ROLL_CAN_ID);
+    uart.setCurrent(pitch_command, PITCH_CAN_ID);
+  } else {
+    uart.setCurrent(0, ROLL_CAN_ID);
+    uart.setCurrent(0, PITCH_CAN_ID);
+  }
+
   delay(1000 / UPDATES_PER_SECOND);
 }
