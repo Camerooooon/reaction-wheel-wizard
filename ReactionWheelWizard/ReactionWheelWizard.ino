@@ -6,6 +6,9 @@
 #define VESC_RX_PIN 1
 #define VESC_TX_PIN 0
 
+#define ROLL_CAN_ID 0
+#define PITCH_CAN_ID 0
+
 #define UPDATES_PER_SECOND 30 
 
 #define DESIRED_ROLL 0
@@ -13,6 +16,9 @@
 
 #define KP_ROLL 0.2
 #define KD_ROLL 0
+
+#define KP_PITCH 0.2
+#define KD_PITCH 0
 
 VescUart uart;
 SoftwareSerial vesc_ser = SoftwareSerial(VESC_RX_PIN, VESC_TX_PIN);
@@ -38,18 +44,6 @@ void setup() {
 void loop() {
   Serial.println("Hello world!");
 
-  if (uart.getVescValues()) {
-    Serial.printf("Motor Temp: %d\n", uart.data.tempMotor);
-  } else {
-    Serial.printf("Failed to get RPM data ):<\n");
-  }
-
-  if (uart.getFWversion()) {
-    Serial.printf("FW VER: %d\n", uart.fw_version);
-  } else {
-    Serial.printf("Could not get fw version\n");
-  }
-
   sensors_event_t orientationData, angVelocityData;
   bno.getEvent(&orientationData, Adafruit_BNO055::VECTOR_EULER);
   bno.getEvent(&angVelocityData, Adafruit_BNO055::VECTOR_GYROSCOPE);
@@ -60,13 +54,18 @@ void loop() {
 
   float roll = orientationData.orientation.z;
   float d_roll_dt = angVelocityData.gyro.z * RAD_TO_DEG;
+
   float pitch = orientationData.orientation.x;
+  float d_pitch_dt = angVelocityData.gyro.x * RAD_TO_DEG;
 
   float roll_error = DESIRED_ROLL - roll;
+  float pitch_error = DESIRED_PITCH - pitch;
 
   float roll_command = roll_error * KP_ROLL - d_roll_dt * KD_ROLL;
+  float pitch_command = pitch_error * KP_PITCH - d_pitch_dt * KD_PITCH;
 
   uart.sendKeepalive();
-  uart.setCurrent(roll_command);
+  uart.setCurrent(roll_command, ROLL_CAN_ID);
+  uart.setCurrent(pitch_command, PITCH_CAN_ID);
   delay(1000 / UPDATES_PER_SECOND);
 }
