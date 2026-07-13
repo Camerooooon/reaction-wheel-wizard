@@ -20,6 +20,9 @@
 #define KP_PITCH 0.2
 #define KD_PITCH 0
 
+#define INVERT_PITCH 0
+#define INVERT_ROLL 0
+
 VescUart uart;
 SoftwareSerial vesc_ser = SoftwareSerial(VESC_RX_PIN, VESC_TX_PIN);
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
@@ -65,7 +68,7 @@ void loop() {
   float pitch_command = pitch_error * KP_PITCH - d_pitch_dt * KD_PITCH;
 
   uart.sendKeepalive();
-  uart.setCurrent(roll_command, ROLL_CAN_ID);
-  uart.setCurrent(pitch_command, PITCH_CAN_ID);
+  // uart.setCurrent(roll_command, ROLL_CAN_ID);
+  uart.setCurrent(4, PITCH_CAN_ID);
   delay(1000 / UPDATES_PER_SECOND);
 }
