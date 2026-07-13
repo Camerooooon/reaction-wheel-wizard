@@ -20,7 +20,7 @@
 #define KP_PITCH 0.2
 #define KD_PITCH 0
 
-#define INVERT_PITCH 0
+#define INVERT_PITCH 1
 #define INVERT_ROLL 0
 
 VescUart uart;
