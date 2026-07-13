@@ -45,11 +45,6 @@ void setup() {
 }
 
 void loop() {
-  Serial.println("Hello world!");
-
-  if (uart.getFWversion(PITCH_CAN_ID)) {
-    printf("fw canId2: %d %d", uart.fw_version.major, uart.fw_version.minor);
-  }
 
   sensors_event_t orientationData, angVelocityData;
   bno.getEvent(&orientationData, Adafruit_BNO055::VECTOR_EULER);
