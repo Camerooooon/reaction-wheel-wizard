@@ -47,6 +47,10 @@ void setup() {
 void loop() {
   Serial.println("Hello world!");
 
+  if (uart.getFWversion(PITCH_CAN_ID)) {
+    printf("fw canId2: %d", uart.fw_version);
+  }
+
   sensors_event_t orientationData, angVelocityData;
   bno.getEvent(&orientationData, Adafruit_BNO055::VECTOR_EULER);
   bno.getEvent(&angVelocityData, Adafruit_BNO055::VECTOR_GYROSCOPE);
