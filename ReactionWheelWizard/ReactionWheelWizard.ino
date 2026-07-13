@@ -48,7 +48,7 @@ void loop() {
   Serial.println("Hello world!");
 
   if (uart.getFWversion(PITCH_CAN_ID)) {
-    printf("fw canId2: %d", uart.fw_version);
+    printf("fw canId2: %d", uart.fw_version.major);
   }
 
   sensors_event_t orientationData, angVelocityData;
