@@ -23,8 +23,8 @@
 #define INVERT_PITCH 1
 #define INVERT_ROLL 0
 
-#define MAX_ROLL_SHUTOFF_DEG 10
-#define MAX_PITCH_SHUTOFF_DEG 10
+#define MAX_ROLL_SHUTOFF_DEG 45
+#define MAX_PITCH_SHUTOFF_DEG 45
 
 VescUart uart;
 SoftwareSerial vesc_ser = SoftwareSerial(VESC_RX_PIN, VESC_TX_PIN);
