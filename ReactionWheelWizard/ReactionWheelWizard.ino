@@ -71,6 +71,14 @@ void loop() {
   float roll_command = roll_error * KP_ROLL - d_roll_dt * KD_ROLL;
   float pitch_command = pitch_error * KP_PITCH - d_pitch_dt * KD_PITCH;
 
+  if (INVERT_PITCH) {
+    pitch_command = -pitch_command;
+  }
+
+  if (INVERT_ROLL) {
+    roll_command = -roll_command;
+  }
+
   uart.sendKeepalive();
   // uart.setCurrent(roll_command, ROLL_CAN_ID);
   uart.setCurrent(4, PITCH_CAN_ID);
