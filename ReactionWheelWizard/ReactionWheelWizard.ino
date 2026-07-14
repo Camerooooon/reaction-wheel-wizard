@@ -73,8 +73,8 @@ void loop() {
   float roll_command = roll_error * KP_ROLL - d_roll_dt * KD_ROLL;
   float pitch_command = pitch_error * KP_PITCH - d_pitch_dt * KD_PITCH;
 
-  Serial.printf("ROLL -> err: %d deg command: %d amps setpoint: %d deg deadzone: %d deg\n", roll_error, roll_command, DESIRED_ROLL, ROLL_DEADZONE);
-  Serial.printf("PITCH -> err: %d deg command: %d amps setpoint: %d deg deadzone: %d deg\n", pitch_error, pitch_command, DESIRED_PITCH, PITCH_DEADZONE);
+  Serial.printf("ROLL -> err: %f deg command: %f amps setpoint: %f deg deadzone: %f deg\n", roll_error, roll_command, DESIRED_ROLL, ROLL_DEADZONE);
+  Serial.printf("PITCH -> err: %f deg command: %f amps setpoint: %f deg deadzone: %f deg\n", pitch_error, pitch_command, DESIRED_PITCH, PITCH_DEADZONE);
 
   if (INVERT_PITCH) {
     pitch_command = -pitch_command;
