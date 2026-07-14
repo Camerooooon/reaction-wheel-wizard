@@ -39,7 +39,6 @@ void setup() {
   Serial.begin(9600);
   vesc_ser.begin(VESC_BAUD_RATE);
 
-  while (!Serial) {}
   while (!vesc_ser) {
     Serial.printf("Waiting for vesc serial...");
     delay(1000);
