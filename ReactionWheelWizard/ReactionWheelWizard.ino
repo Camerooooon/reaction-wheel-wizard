@@ -11,7 +11,7 @@
 
 #define UPDATES_PER_SECOND 30 
 
-#define DESIRED_ROLL -2
+#define DESIRED_ROLL -2.0
 #define DESIRED_PITCH -0.375
 
 #define KP_ROLL 0.2
