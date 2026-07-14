@@ -26,6 +26,9 @@
 #define MAX_ROLL_SHUTOFF_DEG 45
 #define MAX_PITCH_SHUTOFF_DEG 45
 
+#define PITCH_DEADZONE 3.0
+#define ROLL_DEADZONE 3.0
+
 VescUart uart;
 SoftwareSerial vesc_ser = SoftwareSerial(VESC_RX_PIN, VESC_TX_PIN);
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
@@ -83,10 +86,20 @@ void loop() {
     max_angle_fault = 1;
   }
 
-  Serial.printf("Faults: ");
+  Serial.printf("Status: ");
+
+  if (abs(orientationData.orientation.z) < ROLL_DEADZONE) {
+    roll_command = 0;
+    Serial.printf("roll_deadzone ");
+  }
+
+  if (abs(orientationData.orientation.z) < PITCH_DEADZONE) {
+    pitch_command = 0;
+    Serial.printf("pitch_deadzone ");
+  }
 
   if (max_angle_fault) {
-    Serial.printf("max_angle_fault");
+    Serial.printf("max_angle_fault ");
   }
 
   Serial.println();
