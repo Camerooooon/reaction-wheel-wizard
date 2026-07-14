@@ -11,8 +11,8 @@
 
 #define UPDATES_PER_SECOND 30 
 
-#define DESIRED_ROLL 0
-#define DESIRED_PITCH 0
+#define DESIRED_ROLL -2
+#define DESIRED_PITCH -0.375
 
 #define KP_ROLL 0.2
 #define KD_ROLL 0
@@ -26,8 +26,8 @@
 #define MAX_ROLL_SHUTOFF_DEG 45
 #define MAX_PITCH_SHUTOFF_DEG 45
 
-#define PITCH_DEADZONE 3.0
-#define ROLL_DEADZONE 3.0
+#define PITCH_DEADZONE 0.0
+#define ROLL_DEADZONE 0.0
 
 VescUart uart;
 SoftwareSerial vesc_ser = SoftwareSerial(VESC_RX_PIN, VESC_TX_PIN);
@@ -88,12 +88,12 @@ void loop() {
 
   Serial.printf("Status: ");
 
-  if (abs(orientationData.orientation.z) < ROLL_DEADZONE) {
+  if (abs(roll_error) < ROLL_DEADZONE) {
     roll_command = 0;
     Serial.printf("roll_deadzone ");
   }
 
-  if (abs(orientationData.orientation.z) < PITCH_DEADZONE) {
+  if (abs(pitch_error) < PITCH_DEADZONE) {
     pitch_command = 0;
     Serial.printf("pitch_deadzone ");
   }
